@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Servidor HTTP - AREP</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <i class="fas fa-server"></i>
+          <h1>Servidor HTTP Java</h1>
+        </div>
+        <div class="student-info">
+          <p><strong>Alison Valderrama</strong></p>
+          <p class="course">Arquitecturas Empresariales (AREP)</p>
+        </div>
+      </div>
+      <p class="subtitle">Implementación de servidor HTTP con archivos estáticos y servicios REST asíncronos</p>
+    </header>
+
+    <main class="main-content">
+      <div class="api-grid">
+        <div class="api-card">
+          <div class="card-header">
+            <i class="fas fa-arrow-right"></i>
+            <h2>GET /app/hello</h2>
+          </div>
+          <div class="card-body">
+            <div class="input-group">
+              <label for="name">Nombre:</label>
+              <input type="text" id="name" value="Pedro" placeholder="Ingresa tu nombre" />
+            </div>
+            <button id="btnHelloGet" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i>
+              Enviar Petición
+            </button>
+            <div class="response-container">
+              <label>Respuesta:</label>
+              <pre class="response" id="respHelloGet"></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="api-card">
+          <div class="card-header">
+            <i class="fas fa-upload"></i>
+            <h2>POST /app/hello</h2>
+          </div>
+          <div class="card-body">
+            <div class="input-group">
+              <label for="namePost">Nombre:</label>
+              <input type="text" id="namePost" value="Ana" placeholder="Ingresa tu nombre" />
+            </div>
+            <button id="btnHelloPost" class="btn btn-success">
+              <i class="fas fa-paper-plane"></i>
+              Enviar Petición
+            </button>
+            <div class="response-container">
+              <label>Respuesta:</label>
+              <pre class="response" id="respHelloPost"></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="api-card">
+          <div class="card-header">
+            <i class="fas fa-clock"></i>
+            <h2>GET /app/time</h2>
+          </div>
+          <div class="card-body">
+            <p class="card-description">Consulta la hora actual del servidor</p>
+            <button id="btnTime" class="btn btn-info">
+              <i class="fas fa-clock"></i>
+              Consultar Hora
+            </button>
+            <div class="response-container">
+              <label>Respuesta:</label>
+              <pre class="response" id="respTime"></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="api-card">
+          <div class="card-header">
+            <i class="fas fa-folder-open"></i>
+            <h2>Archivos Estáticos</h2>
+          </div>
+          <div class="card-body">
+            <p class="card-description">Demostración de servicio de archivos estáticos (CSS, JS, imágenes)</p>
+            <div class="static-files-demo">
+              <div class="file-item">
+                <i class="fas fa-file-code"></i>
+                <span>style.css</span>
+              </div>
+              <div class="file-item">
+                <i class="fab fa-js-square"></i>
+                <span>app.js</span>
+              </div>
+              <div class="file-item">
+                <i class="fas fa-image"></i>
+                <span>logo.png</span>
+              </div>
+            </div>
+            <div class="logo-container">
+              <img src="logo.png" alt="Logo de prueba" class="demo-logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3><i class="fas fa-graduation-cap"></i> Proyecto Académico</h3>
+          <p>Taller 1 - Arquitecturas Empresariales</p>
+          <p>Implementación de servidor HTTP en Java</p>
+        </div>
+        <div class="footer-section">
+          <h3><i class="fas fa-code"></i> Tecnologías</h3>
+          <p>Java • Sockets • HTTP • REST</p>
+          <p>HTML5 • CSS3 • JavaScript</p>
+        </div>
+        <div class="footer-section">
+          <h3><i class="fas fa-user"></i> Desarrollado por</h3>
+          <p><strong>Alison Valderrama</strong></p>
+          <p>2025</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
