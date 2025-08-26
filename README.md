@@ -1,4 +1,4 @@
-# Taller 1 Diseño y estructuración de aplicaciones distribuidas en internet
+# Taller 2 Web Framework Development for REST Services and Static File Management
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 [![Maven](https://img.shields.io/badge/Maven-3.x-blue.svg)](https://maven.apache.org/)
@@ -7,11 +7,13 @@
 
 ## Introducción
 
-Este es un prototipo basado en Java diseñado para implementar un servidor web, el objetivo es proporcionar una plataforma funcional capaz de gestionar recuros como: 
-- Atender multiples solicitudes Http 
-- Leer archivos y retornar todo lo solicitado en los que se incluyen paginas html, archivos java script e imagenes 
-- Comunicación asincrónica entre el frontend y el backend a través de servicios REST personalizados implementados directamente en sockets Java.
+El objetivo fue extender las capacidades para soportar servicios REST y así permitir la creación de aplicaciones web más completas.
 
+El framework permite
+
+- Definir rutas con funciones lambda utilizando el método **get().**
+- Extraer parámetros de consulta de las solicitudes 
+- Configurar la ubicación de archivos estáticos **staticfiles()**
 ---
 
 ## Tecnologías Utilizadas
@@ -29,8 +31,7 @@ Este es un prototipo basado en Java diseñado para implementar un servidor web, 
 
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/LIZVALMU/arep_httpserver.git
-   cd arep_httpserver
+   git clone https://github.com/LIZVALMU/Taller2_Arep.git
    ```
 
 2. Compilar el proyecto (Maven):

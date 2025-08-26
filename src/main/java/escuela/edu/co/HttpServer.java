@@ -1,34 +1,43 @@
 package escuela.edu.co;
 
-import java.io.*;
-import java.net.*;
-import java.nio.file.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.URLDecoder;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class HttpServer {
 
-    private static final String ROUTE_FILE_SYSTEM = "src/main/resources/static";
+    private static String STATIC_ROOT = "src/main/resources/static";
     private static final int SERVER_PORT = 35000;
     private boolean running = true;
 
+
+     private static final Map<String, RouteHandler> GET_ROUTES = new HashMap<>();
+
     public static void main(String[] args) throws IOException {
-        if (args.length > 0) {
-            try {
-                int port = Integer.parseInt(args[0]);
-                new HttpServer(port);
-            } catch (NumberFormatException e) {
-                System.out.println("Puerto inválido. Usando el puerto por defecto " + SERVER_PORT);
-                new HttpServer();
-            }
-        } else {
-            new HttpServer();
+        staticfiles("/static"); 
+        get("/App/hello", (req, resp) -> {
+            String name = req.getValues("name");
+            if (name == null || name.isEmpty()) name = "Mundo";
+            return String.format("{\"message\": \"Hello %s\", \"timestamp\": \"%s\"}",
+                    name, LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        });
+        get("/App/pi", (req, resp) -> String.valueOf(Math.PI));
 
-        }
+        // Inicia servidor
+        new HttpServer();
     }
-
     /**
      * Initializes and starts the HTTP server on the specified port.
      * <p>
@@ -77,6 +86,28 @@ public class HttpServer {
         running = false;
     }
 
+    public static void staticfiles(String relativeOrAbsolute) {
+        // intenta resolver a carpeta target/classes + relativeOrAbsolute si existe
+        String candidate = "target/classes" + relativeOrAbsolute;
+
+        File f = new File(candidate);
+        if (f.exists() && f.isDirectory()) {
+            STATIC_ROOT = candidate;
+        } else {
+            // si se pasa ruta absoluta, tomarla; sino fallback a la ruta pasada
+            STATIC_ROOT = relativeOrAbsolute.startsWith(File.separator) ? relativeOrAbsolute : "src/main/resources" + relativeOrAbsolute;
+        }
+        System.out.println("Archivos estáticos en: " + STATIC_ROOT);
+    }
+
+    /**
+     * Registra una ruta GET con su handler.
+     */
+    public static void get(String path, RouteHandler handler) {
+        GET_ROUTES.put(path, handler);
+    }
+
+
     private static void handleClient(Socket clientSocket) {
         try (
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -124,7 +155,7 @@ public class HttpServer {
                 path = "/index.html";
             }
 
-            File file = new File(ROUTE_FILE_SYSTEM + path);
+            File file = new File(STATIC_ROOT + path);
 
             if (file.exists() && !file.isDirectory()) {
                 sendFileResponse(out, file, path);

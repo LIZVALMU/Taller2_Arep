@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>escuela.edu.co</groupId>
-    <artifactId>arep_httpserver</artifactId>
+    <artifactId>HttpServer</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -31,7 +31,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.escuelaing.arep.HttpServer</mainClass>
+                            <mainClass>escuela.edu.co</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
